@@ -1,0 +1,119 @@
+@import './styles/_variables.css';
+@import './styles/_base.css';
+@import './styles/_buttons.css';
+@import './styles/_forms.css';
+@import './styles/_layout.css';
+@import './styles/_utilities.css';
+
+/* Dashboard Specific */
+.habit-list-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .habit-list-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.habit-section {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+}
+
+.habit-section h3 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+}
+
+/* Progress Specific */
+.progress-summary {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+.progress-summary p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.streaks-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.streak-item {
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.streak-item h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+.streak-item p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Calendar Heatmap Specific */
+.calendar-container {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  width: 100%; /* Make it take full width */
+  overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+}
+
+.calendar-container h3 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.heatmap-wrapper {
+  width: 1000px; /* Fixed width for the heatmap container */
+  margin: 0 auto; /* Center the heatmap */
+}
+
+.react-calendar-heatmap svg {
+  width: 100%; /* Ensure the SVG fills the wrapper */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.react-calendar-heatmap text {
+  font-size: 12px; /* Increased font size */
+  fill: var(--text-light);
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #ebedf0; /* Light gray for no activity */
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #9be9a8; /* Light green */
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #40c463; /* Medium green */
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #30a14e; /* Darker green */
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #216e39; /* Darkest green */
+}
+
+.react-calendar-heatmap .today-highlight rect {
+  stroke: var(--primary-color) !important;
+  stroke-width: 2px !important;
+}

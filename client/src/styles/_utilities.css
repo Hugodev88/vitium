@@ -1,0 +1,26 @@
+.error-message {
+  color: var(--error-color);
+  margin-top: var(--spacing-sm);
+  font-size: 0.9rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-group {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.card {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+}
+
+.mt-4 {
+  margin-top: var(--spacing-xl);
+}

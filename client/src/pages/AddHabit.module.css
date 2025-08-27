@@ -1,0 +1,8 @@
+.addHabitContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+}

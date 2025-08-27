@@ -1,0 +1,35 @@
+.progressContainer {
+  padding: var(--spacing-xl);
+}
+
+.progressSummary {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+.progressSummary p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.streaksList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.streakItem {
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.streakItem h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+.streakItem p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}

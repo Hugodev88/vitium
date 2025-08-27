@@ -1,0 +1,25 @@
+.habitCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goodHabitCard {
+  background-color: #e0ffe0; /* Light Green */
+  border-left: 5px solid var(--success-color);
+}
+
+.badHabitCard {
+  background-color: #ffe0e0; /* Light Red */
+  border-left: 5px solid var(--error-color);
+}
+
+.habitCard h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
