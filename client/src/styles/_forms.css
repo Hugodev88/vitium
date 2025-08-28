@@ -22,8 +22,31 @@ form {
   margin-bottom: var(--spacing-sm); /* Reduced spacing */
 }
 
-.form-group label {
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+label {
   display: block;
   margin-bottom: var(--spacing-sm);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+

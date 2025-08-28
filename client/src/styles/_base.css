@@ -1,11 +1,30 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--background-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
   color: var(--text-color);
+  background-color: var(--background-color);
   line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-md);
+  font-weight: var(--font-weight-bold);
+  margin-top: 0;
 }
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-color-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+

@@ -1,27 +1,21 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/authSlice';
-import { useState } from 'react';
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector(state => state.auth);
-  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
   };
 
-  const toggleUserMenu = () => {
-    setShowUserMenu(!showUserMenu);
-  };
-
   return (
     <>
       <nav>
-        <div className="container navbar-content">
+        <div className="navbar-content">
           <Link to="/" className="navbar-brand">
             Vitium
           </Link>
@@ -42,21 +36,18 @@ const Layout = () => {
                 <li>
                   <Link to="/streaks">Streaks</Link>
                 </li>
+                <li>
+                  <Link to="/challenges">Challenges</Link>
+                </li>
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="btn-logout">Logout</button>
+                </li>
               </>
             )}
-            {isAuthenticated ? (
-              <li className="user-menu-container">
-                <button onClick={toggleUserMenu} className="user-email-btn">
-                  {user ? user.name : 'User'}
-                </button>
-                {showUserMenu && (
-                  <div className="user-dropdown-menu">
-                    <Link to="/profile" onClick={() => setShowUserMenu(false)}>Profile</Link>
-                    <button onClick={handleLogout}>Logout</button>
-                  </div>
-                )}
-              </li>
-            ) : (
+            {!isAuthenticated && (
               <li>
                 <Link to="/login">Login</Link>
               </li>

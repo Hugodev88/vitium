@@ -2,24 +2,75 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   border-radius: var(--border-radius);
-  margin-bottom: var(--spacing-md);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--surface-color);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.habitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .goodHabitCard {
-  background-color: #e0ffe0; /* Light Green */
-  border-left: 5px solid var(--success-color);
+  border-left: 6px solid var(--success-color);
 }
 
 .badHabitCard {
-  background-color: #ffe0e0; /* Light Red */
-  border-left: 5px solid var(--error-color);
+  border-left: 6px solid var(--error-color);
+}
+
+.habitInfo {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.habitIcon {
+  font-size: 1.8rem;
+  margin-right: var(--spacing-md);
+  color: var(--primary-color);
 }
 
 .habitCard h3 {
   margin: 0;
   color: var(--text-color);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.habitDetails {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  min-width: 200px; /* Adjust as needed */
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.streak {
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-color-secondary);
+}
+
+.flex-group {
+  display: flex;
+  gap: var(--spacing-sm);
 }

@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 
 import './index.css';
 import './App.css';
+import './styles/layout.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/Home.jsx';
@@ -18,6 +19,7 @@ import AddHabit from './pages/AddHabit.jsx';
 import Progress from './pages/Progress.jsx';
 import Streaks from './pages/Streaks.jsx';
 import Profile from './pages/Profile.jsx';
+import Challenges from './pages/Challenges.jsx';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import PublicRoute from './components/PublicRoute.jsx';
@@ -51,6 +53,7 @@ const router = createBrowserRouter([
           { path: 'add-habit', element: <AddHabit /> },
           { path: 'progress', element: <Progress /> },
           { path: 'streaks', element: <Streaks /> },
+          { path: 'challenges', element: <Challenges /> },
           { path: 'profile', element: <Profile /> },
         ],
       },

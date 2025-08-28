@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const PublicRoute = () => {
-  const { isAuthenticated } = useSelector(state => state.auth);
+  const { isAuthenticated, loading } = useSelector(state => state.auth);
 
-  if (isAuthenticated === null) {
+  if (loading) {
     // Still checking authentication status, render nothing or a loading spinner
-    return null; 
+    return <h2>Loading...</h2>; 
   }
 
   return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />;

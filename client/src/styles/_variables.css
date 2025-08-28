@@ -1,16 +1,41 @@
 :root {
-  --primary-color: #6d28d9; /* Deep Purple */
-  --primary-light: #8b5cf6; /* Lighter Purple */
-  --secondary-color: #f3f4f6; /* Light Gray */
-  --text-color: #111827; /* Dark Gray/Black */
-  --text-light: #4b5563; /* Medium Gray */
-  --background-color: #ffffff; /* White */
-  --border-color: #d1d5db; /* Light Border Gray */
-  --success-color: #10b981; /* Green */
-  --error-color: #ef4444; /* Red */
-  --border-radius: 0.5rem;
+  /* Colors */
+  --primary-color: #6d5dd3;
+  --primary-color-dark: #5a4cb8;
+  --secondary-color: #ff9a62;
+  --success-color: #5dd39e;
+  --error-color: #d35d5d;
+  --background-color: #f0f2f5;
+  --surface-color: #ffffff;
+  --text-color: #333333;
+  --text-color-secondary: #777777;
+  --border-color: #e0e0e0;
+
+  /* Typography */
+  --font-family: 'Poppins', sans-serif;
+  --font-size-base: 16px;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
+
+  /* Border Radius */
+  --border-radius: 12px;
+
+  /* Box Shadow */
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
 }
+
