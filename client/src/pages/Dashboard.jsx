@@ -24,9 +24,11 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <h2 className="text-center">Your Habits</h2>
-      <button onClick={() => navigate('/add-habit')} style={{ marginBottom: '20px' }}>Add New Habit</button>
-      <HabitList habits={habits} />
+      <div className={styles.dashboardContentWrapper}>
+        <h2 className="text-center">Your Habits</h2>
+        <button onClick={() => navigate('/add-habit')} style={{ marginBottom: '20px' }}>Add New Habit</button>
+        <HabitList habits={habits} />
+      </div>
     </div>
   );
 };

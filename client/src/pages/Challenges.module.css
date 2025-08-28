@@ -1,0 +1,95 @@
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardTitle {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  flex-grow: 1;
+  margin-bottom: 15px;
+}
+
+.dates {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+
+.participants {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.actions {
+  margin-top: auto; /* Pushes buttons to the bottom */
+  width: 100%;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.joinButton {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.joinButton:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.leaveButton {
+  background-color: var(--color-danger);
+  color: white;
+}
+
+.leaveButton:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.error {
+  color: var(--color-danger);
+  font-weight: bold;
+}

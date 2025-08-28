@@ -8,6 +8,8 @@ const connectDB = require('./db/connect');
 const authRouter = require('./routes/auth');
 const habitsRouter = require('./routes/habits');
 const progressRouter = require('./routes/progress');
+const achievementsRouter = require('./routes/achievements');
+const challengesRouter = require('./routes/challenges');
 
 // Middleware
 const authenticateUser = require('./middleware/authentication');
@@ -22,6 +24,7 @@ app.use(express.json());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/habits', authenticateUser, habitsRouter);
 app.use('/api/v1/progress', authenticateUser, progressRouter);
+app.use('/api/v1/achievements', achievementsRouter);
 
 // Error Handler Middleware
 app.use(errorHandlerMiddleware);

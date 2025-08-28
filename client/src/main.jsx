@@ -20,6 +20,7 @@ import Progress from './pages/Progress.jsx';
 import Streaks from './pages/Streaks.jsx';
 import Profile from './pages/Profile.jsx';
 import Challenges from './pages/Challenges.jsx';
+import Achievements from './pages/Achievements.jsx';
 import Layout from './components/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import PublicRoute from './components/PublicRoute.jsx';
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           { path: 'streaks', element: <Streaks /> },
           { path: 'challenges', element: <Challenges /> },
           { path: 'profile', element: <Profile /> },
+          { path: 'achievements', element: <Achievements /> },
         ],
       },
     ],

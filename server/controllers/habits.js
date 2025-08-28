@@ -1,5 +1,6 @@
 const Habit = require('../models/Habit');
 const { StatusCodes } = require('http-status-codes');
+const { checkAndUnlockAchievements } = require('../utils/achievementChecker');
 
 const getAllHabits = async (req, res) => {
   const habits = await Habit.find({ userId: req.user.userId }).sort('createdAt');
@@ -60,6 +61,8 @@ const updateHabit = async (req, res) => {
   }
 
   await habit.save();
+  // Check and unlock achievements after habit is updated
+  await checkAndUnlockAchievements(userId);
   res.status(StatusCodes.OK).json({ habit });
 };
 

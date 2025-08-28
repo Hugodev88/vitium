@@ -22,6 +22,12 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please provide password'],
     minlength: 6,
   },
+  unlockedAchievements: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Achievement',
+    },
+  ],
 });
 
 UserSchema.pre('save', async function () {

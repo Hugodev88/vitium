@@ -9,6 +9,9 @@
   box-shadow: var(--box-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+  width: 600px; /* Increased width */
+  min-height: 150px; /* Changed to min-height and increased */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .habitCard:hover {
@@ -28,6 +31,8 @@
   display: flex;
   align-items: center;
   flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0; /* Allow content to shrink */
 }
 
 .habitIcon {
@@ -45,9 +50,11 @@
 
 .habitDetails {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-lg);
-  min-width: 200px; /* Adjust as needed */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the start */
+  gap: var(--spacing-sm); /* Reduced gap */
+  min-width: 100px; /* Adjusted min-width */
+  flex-shrink: 0;
 }
 
 .progressBarContainer {
@@ -72,5 +79,8 @@
 
 .flex-group {
   display: flex;
+  flex-direction: column; /* Stack buttons vertically */
   gap: var(--spacing-sm);
+  min-width: 80px; /* Adjusted min-width */
+  flex-shrink: 0;
 }
