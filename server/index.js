@@ -24,7 +24,9 @@ app.use(express.json());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/habits', authenticateUser, habitsRouter);
 app.use('/api/v1/progress', authenticateUser, progressRouter);
-app.use('/api/v1/achievements', achievementsRouter);
+app.use('/api/v1/achievements', authenticateUser, achievementsRouter);
+app.use('/api/v1/challenges', authenticateUser, challengesRouter);
+
 
 // Error Handler Middleware
 app.use(errorHandlerMiddleware);

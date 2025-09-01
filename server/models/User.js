@@ -30,11 +30,15 @@ const UserSchema = new mongoose.Schema({
   ],
 });
 
-UserSchema.pre('save', async function () {
+// Hash da senha antes de salvar
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next(); // só hashear se for novo ou alterado
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
+// Gerar JWT
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
     { userId: this._id, name: this.name, email: this.email },
@@ -43,9 +47,9 @@ UserSchema.methods.createJWT = function () {
   );
 };
 
-UserSchema.methods.comparePassword = async function (canditatePassword) {
-  const isMatch = await bcrypt.compare(canditatePassword, this.password);
-  return isMatch;
+// Comparar senha digitada com hash no banco
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
 };
 
 module.exports = mongoose.model('User', UserSchema);
