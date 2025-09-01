@@ -1,66 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAchievements } from '../store/achievementsSlice';
 import styles from './Achievements.module.css';
 
-
 const Achievements = () => {
-  const { user } = useSelector((state) => state.auth);
-  const token = localStorage.getItem('token');
-
-  const [achievements, setAchievements] = useState([]); // sempre array
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { achievements, loading, error } = useSelector((state) => state.achievements);
 
   useEffect(() => {
-    const fetchAchievements = async () => {
-      if (!user || !token) {
-        setError('User not authenticated.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const response = await axios.get('/api/v1/achievements', config);
-
-        // garante que seja array
-        const data = response.data.achievements;
-        setAchievements(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error('Error fetching achievements:', err);
-        setError('Failed to fetch achievements.');
-        setAchievements([]); // evita erro de undefined
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAchievements();
-  }, [user, token]);
+    dispatch(fetchAchievements());
+  }, [dispatch]);
 
   if (loading) {
-    return <div className={styles.container}>Loading achievements...</div>;
+    return <div className={styles.container}>Carregando conquistas...</div>;
   }
 
   if (error) {
     return (
       <div className={styles.container}>
-        <p className={styles.error}>{error}</p>
+        <p className={styles.error}>Erro: {error}</p>
       </div>
     );
   }
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Your Achievements</h2>
+      <h2 className={styles.title}>Suas Conquistas</h2>
       <div className={styles.grid}>
         {achievements.length === 0 ? (
-          <p>No achievements found yet. Keep tracking your habits!</p>
+          <p>Nenhuma conquista encontrada ainda. Continue acompanhando seus hábitos!</p>
         ) : (
           achievements.map((achievement) => (
             <div
@@ -69,14 +37,14 @@ const Achievements = () => {
                 }`}
             >
               <img
-                src={`/assets/achievements/${achievement.icon}`}
+                src={`/assets/achievements/${achievement.icon || 'default_achievement.svg'}`}
                 alt={achievement.name}
                 className={styles.icon}
               />
               <h3 className={styles.cardTitle}>{achievement.name}</h3>
               <p className={styles.description}>{achievement.description}</p>
               {achievement.unlocked && (
-                <span className={styles.unlockedTag}>Unlocked!</span>
+                <span className={styles.unlockedTag}>Desbloqueado!</span>
               )}
             </div>
           ))

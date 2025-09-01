@@ -28,15 +28,36 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
 }
 
 .card.locked {
-  opacity: 0.6;
+  opacity: 0.5;
   filter: grayscale(100%);
+  border: 2px dashed var(--color-border);
+  cursor: not-allowed;
 }
 
 .card.unlocked {
   border: 2px solid var(--color-accent);
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--color-accent-rgb), 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--color-accent-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--color-accent-rgb), 0);
+  }
 }
 
 .icon {

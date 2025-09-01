@@ -10,6 +10,7 @@ const habitsRouter = require('./routes/habits');
 const progressRouter = require('./routes/progress');
 const achievementsRouter = require('./routes/achievements');
 const challengesRouter = require('./routes/challenges');
+const userChallengesRouter = require('./routes/userChallenges');
 
 // Middleware
 const authenticateUser = require('./middleware/authentication');
@@ -26,6 +27,7 @@ app.use('/api/v1/habits', authenticateUser, habitsRouter);
 app.use('/api/v1/progress', authenticateUser, progressRouter);
 app.use('/api/v1/achievements', authenticateUser, achievementsRouter);
 app.use('/api/v1/challenges', authenticateUser, challengesRouter);
+app.use('/api/v1/user-challenges', authenticateUser, userChallengesRouter);
 
 
 // Error Handler Middleware

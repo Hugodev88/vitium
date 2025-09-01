@@ -1,49 +1,34 @@
-import { useState, useEffect } from 'react';
-import api from '../services/api';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProgress } from '../store/progressSlice';
 import styles from './Progress.module.css';
 import HabitCalendar from '../components/HabitCalendar';
 
 const Progress = () => {
-  const [progress, setProgress] = useState(null);
-  const [habits, setHabits] = useState([]); // State to store habits for the calendar
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { progress, habits, loading, error } = useSelector(state => state.progress);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const progressData = await api.get('/progress');
-        setProgress(progressData.data);
-
-        const habitsData = await api.get('/habits');
-        setHabits(habitsData.data.habits);
-
-      } catch (err) {
-        setError(err.response?.data?.msg || 'Failed to fetch data');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+    dispatch(fetchProgress());
+  }, [dispatch]);
 
   if (loading) {
-    return <h2 className="text-center">Loading Progress...</h2>;
+    return <h2 className="text-center">Carregando Progresso...</h2>;
   }
 
   if (error) {
-    return <h2 className="text-center error-message">Error: {error}</h2>;
+    return <h2 className="text-center error-message">Erro: {error}</h2>;
   }
 
   return (
     <div className={styles.progressContainer}>
-      <h2>Your Progress</h2>
+      <h2>Seu Progresso</h2>
       <div className={`${styles.progressSummary} card`}>
-        <p><strong>Total Habits:</strong> {progress.totalHabits}</p>
-        <p><strong>Good Habits Completed:</strong> {progress.goodHabitsCompleted}</p>
-        <p><strong>Bad Habits Avoided:</strong> {progress.badHabitsAvoided}</p>
+        <p><strong>Total de Hábitos:</strong> {progress.totalHabits}</p>
+        <p><strong>Hábitos Bons Completos:</strong> {progress.goodHabitsCompleted}</p>
+        <p><strong>Hábitos Ruins Evitados:</strong> {progress.badHabitsAvoided}</p>
       </div>
-      <HabitCalendar habits={habits} /> {/* Add the calendar component */}
+      <HabitCalendar habits={habits} />
     </div>
   );
 };

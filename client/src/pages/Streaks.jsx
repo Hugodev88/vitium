@@ -1,45 +1,35 @@
-import { useState, useEffect } from 'react';
-import api from '../services/api';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchStreaks } from '../store/streaksSlice';
 import styles from './Progress.module.css'; // Reusing some styles from Progress
 
 const Streaks = () => {
-  const [progress, setProgress] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { progress, loading, error } = useSelector(state => state.streaks);
 
   useEffect(() => {
-    const fetchProgress = async () => {
-      try {
-        const { data } = await api.get('/progress');
-        setProgress(data);
-      } catch (err) {
-        setError(err.response?.data?.msg || 'Failed to fetch progress');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProgress();
-  }, []);
+    dispatch(fetchStreaks());
+  }, [dispatch]);
 
   if (loading) {
-    return <h2 className="text-center">Loading Streaks...</h2>;
+    return <h2 className="text-center">Carregando Sequências...</h2>;
   }
 
   if (error) {
-    return <h2 className="text-center error-message">Error: {error}</h2>;
+    return <h2 className="text-center error-message">Erro: {error}</h2>;
   }
 
   return (
     <div className={styles.progressContainer}> {/* Reusing progressContainer style */}
-      <h2>Your Streaks</h2>
+      <h2>Suas Sequências</h2>
       <div className={styles.streaksList}>
-        {progress.streaks.length === 0 ? (
-          <p>No streaks yet. Keep tracking your habits!</p>
+        {progress && progress.streaks && progress.streaks.length === 0 ? (
+          <p>Nenhuma sequência ainda. Continue acompanhando seus hábitos!</p>
         ) : (
-          progress.streaks.map(item => (
+          progress && progress.streaks && progress.streaks.map(item => (
             <div key={item.habitId} className={`${styles.streakItem} card`}>
               <h4>{item.name}</h4>
-              <p>{item.streak} day{item.streak !== 1 ? 's' : ''} streak</p>
+              <p>{item.streak} dia{item.streak !== 1 ? '' : ''} de sequência</p>
             </div>
           ))
         )}

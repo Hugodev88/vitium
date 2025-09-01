@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
       ref: 'Achievement',
     },
   ],
+  badges: {
+    type: [String],
+    default: [],
+  },
 });
 
 // Hash da senha antes de salvar

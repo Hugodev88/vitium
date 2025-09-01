@@ -10,6 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [formError, setFormError] = useState(null); // Local state for form validation errors
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, isAuthenticated } = useSelector(state => state.auth);
@@ -24,7 +25,8 @@ const Login = () => {
     e.preventDefault();
 
     if (!isLogin && password !== confirmPassword) {
-      return dispatch(setError('Passwords do not match'));
+      setFormError('Passwords do not match');
+      return;
     }
 
     if (isLogin) {
@@ -91,6 +93,7 @@ const Login = () => {
         </button>
       </form>
       {error && <p className="error-message">{error}</p>}
+      {formError && <p className="error-message">{formError}</p>}
       <button className="mt-4" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? 'Need to register?' : 'Already have an account?'}
       </button>

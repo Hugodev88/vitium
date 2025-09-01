@@ -1,44 +1,51 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setName, setDescription, setType, resetForm, createHabit } from '../store/habitFormSlice';
+import { toast } from 'react-toastify';
 
-const HabitForm = ({ setHabits }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('good');
+const HabitForm = () => {
+  const dispatch = useDispatch();
+  const { name, description, type, loading, error, success } = useSelector(state => state.habitForm);
+
+  useEffect(() => {
+    if (success) {
+      toast.success('Hábito criado com sucesso!');
+      dispatch(resetForm());
+      // Optionally, dispatch an action to refresh the habits list in habitsSlice
+      // e.g., dispatch(fetchHabits()); if you have such an action
+    }
+    if (error) {
+      toast.error(`Erro ao criar hábito: ${error}`);
+    }
+  }, [success, error, dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.post('http://localhost:5000/api/v1/habits', { name, description, type });
-      setHabits(prevHabits => [...prevHabits, data.habit]);
-      setName('');
-      setDescription('');
-      setType('good');
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(createHabit({ name, description, type }));
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Habit name"
+        placeholder="Nome do Hábito"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => dispatch(setName(e.target.value))}
         required
       />
       <input
         type="text"
-        placeholder="Description"
+        placeholder="Descrição"
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) => dispatch(setDescription(e.target.value))}
       />
-      <select value={type} onChange={(e) => setType(e.target.value)}>
-        <option value="good">Good</option>
-        <option value="bad">Bad</option>
+      <select value={type} onChange={(e) => dispatch(setType(e.target.value))}>
+        <option value="good">Bom</option>
+        <option value="bad">Ruim</option>
       </select>
-      <button type="submit">Add Habit</button>
+      <button type="submit" disabled={loading}>
+        {loading ? 'Adicionando...' : 'Adicionar Hábito'}
+      </button>
     </form>
   );
 };
