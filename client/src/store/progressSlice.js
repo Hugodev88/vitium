@@ -34,11 +34,7 @@ const progressSlice = createSlice({
       })
       .addCase(fetchProgress.fulfilled, (state, action) => {
         state.loading = false;
-        state.progress = action.payload.overallProgress || {
-          totalHabits: 0,
-          goodHabitsCompleted: 0,
-          badHabitsAvoided: 0,
-        };
+        state.progress = action.payload;
         state.habits = action.payload.habitsData || [];
       })
       .addCase(fetchProgress.rejected, (state, action) => {

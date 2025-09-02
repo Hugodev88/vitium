@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../services/api';
 import { toast } from 'react-toastify';
+import { fetchProgress } from './progressSlice';
 
 // Async Thunks
 export const fetchHabits = createAsyncThunk(

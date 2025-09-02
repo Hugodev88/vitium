@@ -71,17 +71,61 @@ const getUserChallengeProgress = async (req, res) => {
     const userChallenge = await UserChallenge.findOne({ user: userId, challenge: challengeId });
 
     if (!userChallenge) {
-        return res.status(StatusCodes.OK).json({ progress: 0, isCompleted: false, completedAt: null });
+        return res.status(StatusCodes.OK).json({ progress: [], isCompleted: false, completedAt: null });
     }
 
-    res.status(StatusCodes.OK).json({
-        progress: userChallenge.progress.length,
-        isCompleted: userChallenge.isCompleted,
-        completedAt: userChallenge.completedAt
-    });
+    res.status(StatusCodes.OK).json({ userChallenge });
 };
+
+const unmarkChallengeDayComplete = async (req, res) => {
+    const { userId } = req.user;
+    const { challengeId } = req.params;
+
+    if (!challengeId) {
+        throw new BadRequestError('Please provide challenge ID');
+    }
+
+    const userChallenge = await UserChallenge.findOne({ user: userId, challenge: challengeId });
+
+    if (!userChallenge) {
+        throw new NotFoundError('No challenge progress found for this user');
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const initialProgressLength = userChallenge.progress.length;
+
+    userChallenge.progress = userChallenge.progress.filter(date => {
+        const d = new Date(date);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime() !== today.getTime();
+    });
+
+    if (userChallenge.progress.length < initialProgressLength) {
+        userChallenge.isCompleted = false;
+        userChallenge.completedAt = null;
+        
+        // Remove the badge if it was awarded
+        const user = await User.findById(userId);
+        const challenge = await Challenge.findById(challengeId);
+        if (user && challenge) {
+            const badgeName = challenge.name + ' Master';
+            if (user.badges.includes(badgeName)) {
+                user.badges = user.badges.filter(b => b !== badgeName);
+                await user.save();
+            }
+        }
+    }
+
+    await userChallenge.save();
+
+    res.status(StatusCodes.OK).json({ userChallenge });
+};
+
 
 module.exports = {
     markChallengeDayComplete,
     getUserChallengeProgress,
+    unmarkChallengeDayComplete,
 };

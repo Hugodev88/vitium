@@ -9,8 +9,16 @@ const getProgress = async (req, res) => {
   const goodHabits = habits.filter(h => h.type === 'good');
   const badHabits = habits.filter(h => h.type === 'bad');
 
-  const goodHabitsCompleted = goodHabits.reduce((acc, habit) => acc + habit.records.length, 0);
-  const badHabitsAvoided = badHabits.reduce((acc, habit) => acc + habit.records.length, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const isToday = (date) => {
+    const recordDate = new Date(date);
+    return recordDate >= today;
+  };
+
+  const goodHabitsCompleted = goodHabits.filter(habit => habit.records.some(record => isToday(record))).length;
+  const badHabitsAvoided = badHabits.filter(habit => habit.records.some(record => isToday(record))).length;
 
   const calculateStreak = (records) => {
     if (records.length === 0) return 0;
@@ -46,6 +54,7 @@ const getProgress = async (req, res) => {
     goodHabitsCompleted,
     badHabitsAvoided,
     streaks,
+    habitsData: habits,
   });
 };
 

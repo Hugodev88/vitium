@@ -9,7 +9,6 @@
   box-shadow: var(--box-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-  width: 600px; /* Increased width */
   min-height: 150px; /* Changed to min-height and increased */
   flex-shrink: 0; /* Prevent shrinking */
 }
@@ -19,25 +18,16 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.goodHabitCard {
+.habitCard[data-habit-type="good"] {
   border-left: 6px solid var(--success-color);
 }
 
-.badHabitCard {
+.habitCard[data-habit-type="bad"] {
   border-left: 6px solid var(--error-color);
-}
-
-.habitInfo {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  flex-shrink: 1;
-  min-width: 0; /* Allow content to shrink */
 }
 
 .habitIcon {
   font-size: 1.8rem;
-  margin-right: var(--spacing-md);
   color: var(--primary-color);
 }
 
@@ -53,8 +43,7 @@
   flex-direction: column; /* Stack elements vertically */
   align-items: flex-start; /* Align items to the start */
   gap: var(--spacing-sm); /* Reduced gap */
-  min-width: 100px; /* Adjusted min-width */
-  flex-shrink: 0;
+  margin-top: var(--spacing-md);
 }
 
 .progressBarContainer {
@@ -77,10 +66,57 @@
   color: var(--text-color-secondary);
 }
 
-.flex-group {
+.leftSection {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
+  align-items: center;
+  margin-right: var(--spacing-md);
+}
+
+.centerSection {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  margin-left: var(--spacing-md);
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-sm);
-  min-width: 80px; /* Adjusted min-width */
-  flex-shrink: 0;
+}
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-size: 2rem;
+  color: black !important;
+}
+
+.iconButton:hover {
+  transform: scale(1.1);
+}
+
+.completeButton {
+  background-color: var(--success-color);
+}
+
+.undoButton {
+  background-color: var(--secondary-color);
+}
+
+.deleteButton {
+  background-color: var(--error-color);
 }

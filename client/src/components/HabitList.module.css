@@ -1,0 +1,393 @@
+/* Container Principal */
+.habitListContainer {
+	background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+	border: 1px solid #e5e7eb;
+	animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Header com Tabs */
+.header {
+	background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+	padding: 20px 30px 0;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.tabsContainer {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.tabsContainer::-webkit-scrollbar {
+	display: none;
+}
+
+.tab {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 20px;
+	background: transparent;
+	border: none;
+	border-radius: 12px 12px 0 0;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: #6b7280;
+	white-space: nowrap;
+	position: relative;
+	min-width: fit-content;
+}
+
+.tab:hover {
+	background: rgba(79, 70, 229, 0.05);
+	color: #4f46e5;
+}
+
+.activeTab {
+	background: #ffffff;
+	color: #4f46e5;
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e5e7eb;
+	border-bottom: 1px solid #ffffff;
+	margin-bottom: -1px;
+}
+
+.activeTab::after {
+	content: '';
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.tabIcon {
+	font-size: 1.1rem;
+}
+
+.tabText {
+	font-weight: 600;
+}
+
+.tabBadge {
+	background: rgba(107, 114, 128, 0.15);
+	color: #374151;
+	padding: 4px 8px;
+	border-radius: 12px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	min-width: 20px;
+	text-align: center;
+}
+
+.activeTab .tabBadge {
+	background: rgba(79, 70, 229, 0.15);
+	color: #4f46e5;
+}
+
+.goodBadge {
+	background: rgba(16, 185, 129, 0.15) !important;
+	color: #059669 !important;
+}
+
+.badBadge {
+	background: rgba(239, 68, 68, 0.15) !important;
+	color: #dc2626 !important;
+}
+
+/* Content Area */
+.content {
+	padding: 30px;
+	min-height: 300px;
+}
+
+/* View Controls */
+.viewControls {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 25px;
+	padding: 15px 20px;
+	background: rgba(79, 70, 229, 0.03);
+	border-radius: 12px;
+	border: 1px solid rgba(79, 70, 229, 0.1);
+}
+
+.filterInfo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.resultCount {
+	font-size: 1rem;
+	color: #374151;
+	font-weight: 600;
+}
+
+.filterType {
+	color: #6b7280;
+	font-weight: 400;
+}
+
+/* Habits Grid */
+.habitsGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 20px;
+	animation: slideUp 0.5s ease-out;
+}
+
+/* .habitWrapper {
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	background: #ffffff;
+}
+
+.habitWrapper:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.goodHabit {
+	border-left: 4px solid #10b981;
+}
+
+.goodHabit:hover {
+	border-left-color: #059669;
+	box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+}
+
+.badHabit {
+	border-left: 4px solid #ef4444;
+}
+
+.badHabit:hover {
+	border-left-color: #dc2626;
+	box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+} */
+
+/* Empty State */
+.emptyState {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 60px 40px;
+	color: #6b7280;
+}
+
+.emptyIcon {
+	font-size: 4rem;
+	margin-bottom: 20px;
+	opacity: 0.7;
+}
+
+.emptyState h3 {
+	font-size: 1.5rem;
+	color: #374151;
+	margin: 0 0 10px 0;
+	font-weight: 600;
+}
+
+.emptyState p {
+	font-size: 1.1rem;
+	margin: 0;
+	max-width: 400px;
+	line-height: 1.6;
+}
+
+/* Summary Footer */
+.summary {
+	background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+	padding: 20px 30px;
+	border-top: 1px solid #e5e7eb;
+	margin-top: auto;
+}
+
+.summaryStats {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	flex-wrap: wrap;
+}
+
+.summaryItem {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 16px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.summaryIcon {
+	font-size: 1.2rem;
+}
+
+.summaryText {
+	font-size: 0.95rem;
+	color: #374151;
+}
+
+.summaryText strong {
+	color: #111827;
+	font-weight: 700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.header {
+		padding: 15px 20px 0;
+	}
+
+	.tab {
+		padding: 10px 16px;
+		font-size: 0.9rem;
+	}
+
+	.tabText {
+		display: none;
+	}
+
+	.content {
+		padding: 20px;
+	}
+
+	.habitsGrid {
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+
+	.viewControls {
+		padding: 12px 16px;
+		margin-bottom: 20px;
+	}
+
+	.summaryStats {
+		gap: 15px;
+	}
+
+	.summaryItem {
+		padding: 6px 12px;
+	}
+
+	.summary {
+		padding: 15px 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.header {
+		padding: 10px 15px 0;
+	}
+
+	.content {
+		padding: 15px;
+	}
+
+	.tab {
+		padding: 8px 12px;
+	}
+
+	.tabBadge {
+		font-size: 0.75rem;
+		padding: 2px 6px;
+	}
+
+	.emptyState {
+		padding: 40px 20px;
+	}
+
+	.emptyState h3 {
+		font-size: 1.3rem;
+	}
+
+	.summaryStats {
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.habitsGrid {
+		grid-template-columns: 1fr;
+	}
+
+	.habitWrapper {
+		margin: 0 -5px;
+	}
+}
+
+/* Estados especiais */
+@media (max-width: 1024px) {
+	.habitsGrid {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+}
+
+@media (min-width: 1400px) {
+	.habitsGrid {
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	}
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+
+	.habitListContainer,
+	.habitsGrid,
+	.habitWrapper,
+	.tab {
+		animation: none;
+		transition: none;
+	}
+
+	.habitWrapper:hover {
+		transform: none;
+	}
+}
+
+/* Compatibilidade com classes globais existentes */
+.habitListContainer :global(.habit-list-container) {
+	display: contents;
+}
+
+.habitListContainer :global(.habit-section) {
+	display: contents;
+}

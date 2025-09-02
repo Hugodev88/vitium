@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteHabit, toggleHabit } from '../store/habitsSlice';
+import { fetchProgress } from '../store/progressSlice';
 import styles from './Habit.module.css';
-import { FaFire } from 'react-icons/fa'; // Example icon
+import { FaFire, FaCheck, FaUndo, FaTrash } from 'react-icons/fa'; // Example icon
 import HabitTooltip from './HabitTooltip';
 
 const Habit = ({ habit }) => {
@@ -13,8 +14,9 @@ const Habit = ({ habit }) => {
     dispatch(deleteHabit(habit._id));
   };
 
-  const handleToggle = () => {
-    dispatch(toggleHabit(habit._id));
+  const handleToggle = async () => {
+    await dispatch(toggleHabit(habit._id));
+    dispatch(fetchProgress());
   };
 
   const isCompletedToday = () => {
@@ -76,31 +78,41 @@ const Habit = ({ habit }) => {
   const goal = 30; // Example goal
   const progress = Math.min((currentStreak / goal) * 100, 100);
 
-  const cardClass = `${styles.habitCard} ${habit.type === 'good' ? styles.goodHabitCard : styles.badHabitCard}`;
+  const cardClass = styles.habitCard;
 
   return (
     <div 
       className={cardClass}
+      data-habit-type={habit.type}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
       {showTooltip && <HabitTooltip habit={habit} longestStreak={longestStreak} />}
-      <div className={styles.habitInfo}>
+      <div className={styles.leftSection}>
         <FaFire className={styles.habitIcon} />
-        <h3>{habit.name}</h3>
       </div>
-      <div className={styles.habitDetails}>
-        <div className={styles.progressBarContainer}>
-          <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
+      <div className={styles.centerSection}>
+        <div className={styles.habitInfo}>
+          <h3>{habit.name}</h3>
         </div>
-        <span className={styles.streak}>Streak: {currentStreak} days</span>
+        <div className={styles.habitDetails}>
+          <div className={styles.progressBarContainer}>
+            <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
+          </div>
+          <span className={styles.streak}>Streak: {currentStreak} days</span>
+        </div>
       </div>
-      <div className="flex-group">
-        <button onClick={handleToggle} className={isCompletedToday() ? 'btn-undo' : 'btn-complete'}>
-          {isCompletedToday() ? 'Undo' : 'Complete'}
-        </button>
-        <button onClick={handleDelete} className="btn-delete">Delete</button>
+      <div className={styles.rightSection}>
+        <div className={styles.actionButtons}>
+          <button onClick={handleToggle} className={`${styles.iconButton} ${isCompletedToday() ? styles.undoButton : styles.completeButton}`}>
+            {isCompletedToday() ? <FaUndo /> : <FaCheck />}
+          </button>
+          <button onClick={handleDelete} className={`${styles.iconButton} ${styles.deleteButton}`}>
+            <FaTrash />
+          </button>
+        </div>
       </div>
+
     </div>
   );
 };

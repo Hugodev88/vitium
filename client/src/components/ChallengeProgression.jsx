@@ -12,6 +12,7 @@ const ChallengeProgression = ({ challengeId, challengeName }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [badgeEarned, setBadgeEarned] = useState(false); // Para controlar a notificação da insígnia
+    const [completedToday, setCompletedToday] = useState(false);
 
     const requiredDays = 30; // Número de dias para completar o desafio (deve ser consistente com o backend)
 
@@ -26,8 +27,24 @@ const ChallengeProgression = ({ challengeId, challengeName }) => {
                 setLoading(true);
                 setError(null); // Limpar erros anteriores
                 const response = await axios.get(`/user-challenges/${challengeId}/progress`);
-                setProgress(response.data.progress);
-                setIsCompleted(response.data.isCompleted);
+                const { userChallenge } = response.data;
+                if (userChallenge) {
+                    setProgress(userChallenge.progress.length);
+                    setIsCompleted(userChallenge.isCompleted);
+
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const completed = userChallenge.progress.some(date => {
+                        const d = new Date(date);
+                        d.setHours(0, 0, 0, 0);
+                        return d.getTime() === today.getTime();
+                    });
+                    setCompletedToday(completed);
+                } else {
+                    setProgress(0);
+                    setIsCompleted(false);
+                    setCompletedToday(false);
+                }
                 setLoading(false);
             } catch (err) {
                 setError('Falha ao carregar o progresso do desafio.');
@@ -51,6 +68,7 @@ const ChallengeProgression = ({ challengeId, challengeName }) => {
 
             // Atualiza o estado com o novo progresso
             setProgress(response.data.userChallenge.progress.length);
+            setCompletedToday(true);
 
             // Verifica se o desafio foi completado AGORA e se não estava completo antes
             if (response.data.userChallenge.isCompleted && !isCompleted) {
@@ -74,6 +92,30 @@ const ChallengeProgression = ({ challengeId, challengeName }) => {
         }
     };
 
+    const handleUnmarkDayComplete = async () => {
+        if (!user || !challengeId) {
+            return;
+        }
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await axios.post(`/user-challenges/${challengeId}/uncomplete`);
+            const { userChallenge } = response.data;
+            setProgress(userChallenge.progress.length);
+            setIsCompleted(userChallenge.isCompleted);
+            setCompletedToday(false);
+            toast.info('Dia desmarcado.');
+            setLoading(false);
+        } catch (err) {
+            setError('Falha ao desmarcar o dia.');
+            setLoading(false);
+            console.error('Erro ao desmarcar dia:', err);
+            if (err.response && err.response.data && err.response.data.msg) {
+                toast.error(err.response.data.msg);
+            }
+        }
+    };
+
     if (loading) return <p>Carregando progresso do desafio...</p>;
     if (error) return <p style={{ color: 'red' }}>Erro: {error}</p>;
 
@@ -85,23 +127,45 @@ const ChallengeProgression = ({ challengeId, challengeName }) => {
             {isCompleted ? (
                 <p style={{ color: 'green', fontWeight: 'bold', fontSize: '1.1em' }}>🎉 Desafio Concluído! 🎉</p>
             ) : (
-                <button
-                    onClick={handleMarkDayComplete}
-                    disabled={loading || isCompleted}
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#28a745', // Cor verde para "marcar"
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        fontSize: '1em',
-                        opacity: loading || isCompleted ? 0.6 : 1,
-                        transition: 'background-color 0.3s ease'
-                    }}
-                >
-                    {loading ? 'Marcando...' : 'Marcar Dia Como Completo'}
-                </button>
+                <>
+                    <button
+                        onClick={handleMarkDayComplete}
+                        disabled={loading || isCompleted || completedToday}
+                        style={{
+                            padding: '10px 20px',
+                            backgroundColor: '#28a745',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '5px',
+                            cursor: 'pointer',
+                            fontSize: '1em',
+                            opacity: loading || isCompleted || completedToday ? 0.6 : 1,
+                            transition: 'background-color 0.3s ease'
+                        }}
+                    >
+                        {loading ? 'Marcando...' : 'Marcar Dia Como Completo'}
+                    </button>
+                    {completedToday && (
+                        <button
+                            onClick={handleUnmarkDayComplete}
+                            disabled={loading}
+                            style={{
+                                padding: '10px 20px',
+                                backgroundColor: '#dc3545',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer',
+                                fontSize: '1em',
+                                opacity: loading ? 0.6 : 1,
+                                transition: 'background-color 0.3s ease',
+                                marginLeft: '10px'
+                            }}
+                        >
+                            {loading ? 'Desfazendo...' : 'Desfazer'}
+                        </button>
+                    )}
+                </>
             )}
 
             {badgeEarned && (

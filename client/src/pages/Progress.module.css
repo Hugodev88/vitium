@@ -1,35 +1,641 @@
+/* Container Principal */
 .progressContainer {
-  padding: var(--spacing-xl);
+  padding: 40px 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #f8fafc 0%, #ffffff 100%);
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Overview Section */
+.overviewSection {
+  margin-bottom: 40px;
+}
+
+.mainProgressCard {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.progressHeader h3 {
+  font-size: 1.5rem;
+  color: #111827;
+  margin: 0;
+  font-weight: 600;
+}
+
+.progressBadge {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Progress Bar */
+.progressBar {
+  margin-bottom: 15px;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+  border-radius: 10px;
+  transition: width 1s ease-in-out;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  animation: progressGrow 1.5s ease-out;
+}
+
+@keyframes progressGrow {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: var(--progress-width, 0%);
+  }
+}
+
+.progressText {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.statCard {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+}
+
+/* Stat Icons */
+.statIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statIcon.totalIcon {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+}
+
+.statIcon.goodIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.statIcon.badIcon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.statIcon.streakIcon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statNumber {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 5px 0;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0 0 3px 0;
+  font-weight: 600;
+}
+
+.statSubtext {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Achievements Section */
+.achievementsSection {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.sectionHeader h3 {
+  font-size: 1.6rem;
+  color: #111827;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.sectionHeader p {
+  color: #6b7280;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.achievementsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.achievementItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(79, 70, 229, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid #4f46e5;
+  transition: all 0.3s ease;
+  animation: achievementSlide 0.6s ease-out;
+}
+
+.achievementItem:hover {
+  background: rgba(79, 70, 229, 0.1);
+  transform: translateX(5px);
+}
+
+@keyframes achievementSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.achievementIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.achievementContent h4 {
+  font-size: 1.1rem;
+  color: #111827;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.achievementContent p {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.noAchievements {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.noAchievements p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Calendar Section */
+.calendarSection {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.calendarWrapper {
+  margin-top: 20px;
+  animation: slideUp 0.6s ease-out;
+}
+
+/* Loading State */
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #e5e7eb;
+  border-left: 4px solid #4f46e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-size: 1.3rem;
+  color: #6b7280;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Error State */
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 40px;
+}
+
+.errorIcon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.errorTitle {
+  font-size: 1.8rem;
+  color: #111827;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  padding: 15px 25px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.retryButton {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+}
+
+.retryButton:hover {
+  background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Compatibilidade com CSS antigo */
 .progressSummary {
-  margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg);
+  margin-bottom: 30px;
+  padding: 25px;
   font-size: 1.1rem;
 }
 
 .progressSummary p {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 15px;
 }
 
 .streaksList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-md);
+  gap: 20px;
 }
 
 .streakItem {
   text-align: center;
-  padding: var(--spacing-md);
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .streakItem h4 {
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-color);
+  margin-bottom: 10px;
+  color: #111827;
+  font-weight: 600;
 }
 
 .streakItem p {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: #4f46e5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .progressContainer {
+    padding: 20px 15px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .statCard {
+    padding: 20px;
+  }
+
+  .mainProgressCard {
+    padding: 20px;
+  }
+
+  .progressHeader {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .achievementsSection,
+  .calendarSection {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .statNumber {
+    font-size: 1.8rem;
+  }
+
+  .statIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .achievementItem {
+    padding: 15px;
+  }
+
+  .progressContainer {
+    padding: 15px 10px;
+  }
+}
+
+/* Calendar Heatmap */
+.calendar-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.heatmap-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+/* Cells */
+.color-empty {
+  fill: #e5e7eb;
+  stroke: #d1d5db;
+  stroke-width: 1px;
+  rx: 3;
+  ry: 3;
+}
+
+.color-scale-1 { fill: #d1fae5; }
+.color-scale-2 { fill: #34d399; }
+.color-scale-3 { fill: #10b981; }
+.color-scale-4 { fill: #059669; }
+
+/* Highlight today */
+.today-highlight {
+  stroke: #4f46e5;
+  stroke-width: 2px;
+}
+
+/* Tooltip */
+.react-tooltip {
+  background: #4f46e5;
+  color: white;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heatmap-wrapper { padding: 10px; }
+}
+
+@media (max-width: 480px) {
+  .calendar-container h3 { font-size: 1.2rem; }
+}
+
+.titleIcon {
+  /* Garante que o emoji fica normal, sem gradiente nem clip */
+  -webkit-text-fill-color: initial;
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  color: #333;
+  /* Ou outra cor que combine com tema */
+  font-size: 1em;
+  /* opcional: igual ao texto */
+  vertical-align: middle;
+  /* opcional: melhor alinhamento */
+  margin-right: 0.5em;
+  /* opcional: espaço entre emoji e texto */
+}
+
+.calendarWrapper {
+  margin-top: 20px;
+  animation: slideUp 0.6s ease-out;
+
+  width: 100%;
+  /* novo */
+  overflow-x: auto;
+  /* novo: permite scroll horizontal se necessário */
+}
+
+.heatmap-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+
+  width: 100%;
+  /* novo: ocupa toda a largura disponível */
+}
+
+.calendar-container {
+  width: 100%;
+  /* garante que o CalendarHeatmap não limite o pai */
+  min-width: 700px;
+  /* opcional: mantém células legíveis em desktop */
+}
+
+.progressContainer {
+  padding: 40px 30px;
+  max-width: 1400px;
+  width: 100%;
+  /* importante: ocupa toda a largura disponível */
+  margin: 0 auto;
+  background: linear-gradient(145deg, #f8fafc 0%, #ffffff 100%);
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease-in-out;
 }
